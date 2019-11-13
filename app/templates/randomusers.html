@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>{{ title }}</h1>
+    <p> {{ subtitle }} </p>
+    <form>
+        <div class="form-group">
+            <label for="gender">Who do you want to fuck</label>
+            <select onchange="onChange()" class="form-control" id="gender">
+                <option value="nonbinary">everybody</option>
+                <option value="female">female</option>
+                <option value="male">male</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+
+<div>
+</div>
+<div class="container" id="select">
+    <div class="row">
+        <p id="demo"></p>
+
+        {% for user in user_list %}
+        <div class="col-xs-12 col-md-6 col-lg-3 {{user.get_gender()}}">
+            <div class="card">
+                <div class="view overlay zoom">
+                    <img class="card-img-top img-fluid" src="{{ user.get_picture() }}">
+                </div>
+                <div class="card-body">
+                    <h2 id="{{ user.get_username() }}" class="card-title">{{ user.get_full_name() }} </h2>
+
+                    <div class="container-fluid buttons">
+                        <a class="btn btn-city btn-sm" href="https://github.com/{{ user.get_username() }}">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a class="btn btn-city btn-sm" href="https://twitter.com/{{ user.get_username() }}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-city btn-sm" href="https://instagram.com/{{ user.get_username() }}">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
